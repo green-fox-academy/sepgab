@@ -1,0 +1,25 @@
+h1 {
+  color: blue;
+}
+
+h2 {
+  color: orange;
+}
+
+ul {
+  color:blue;
+  list-style-type: square;
+}
+
+ul ul {
+  color: black;
+  list-style-type: disc;
+}
+
+ul ol {
+  color: black;
+}
+
+.apple {
+  color: red;
+}

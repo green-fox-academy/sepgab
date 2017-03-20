@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+main {
+  max-width: 200px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 12px;
+  border: solid black;
+  border-width: 0px 1.5px 1.5px 1.5px;
+  padding: 10px;
+}
+
+p:last-child {
+  border-bottom-width: 0px;
+}
+
+p:hover {
+  background: orange;
+}

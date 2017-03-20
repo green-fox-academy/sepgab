@@ -1,0 +1,16 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.boxed {
+  font-size: 32px;
+  font-family: 'Roboto', sans-serif;
+  color: #005566;
+  width: 316px;
+  height: 98px;
+  margin: 5px 5px 24px;
+  padding: 16px 16px;
+  border: 5px solid #7dce94;
+  background-color: #0e91a1;
+}

@@ -1,0 +1,15 @@
+p, .asteroid_b329_big {
+  color:blue;
+}
+
+div > div {
+  border: 1px solid green;
+}
+
+div {
+  font-weight: bold;
+}
+
+p {
+  background-color: yellow;
+}

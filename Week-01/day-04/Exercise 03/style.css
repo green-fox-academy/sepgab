@@ -1,0 +1,36 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.bigbox {
+  width: 316px;
+  margin: 2px 2px 4px;
+  border: 15px solid #4285f4;
+}
+
+.boxed {
+  text-align: center;
+  font-size: 32px;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  width: 316px;
+  height: 78px;
+  padding-top: 55px;
+}
+
+#box1 {
+  background-color: #e67676;
+}
+
+#box2 {
+  background-color: #e67676;
+}
+
+#box3 {
+  background-color: #a9e6e6;
+}
+
+#box4 {
+  background-color: #a9e6e6;
+}
