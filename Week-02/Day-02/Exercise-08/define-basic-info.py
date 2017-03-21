@@ -1,0 +1,8 @@
+name = input ("What is your name? ")
+age = int(input ("How old are you? "))
+height = float(input ("Please enter your height (in meters). "))
+status = bool(input ("Are you married? (True or False) "))
+print ("Name: " + name)
+print ("Age: " + str(age))
+print ("Height: " + str(height))
+print ("Married: " + str(status))
