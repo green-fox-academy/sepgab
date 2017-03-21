@@ -1,0 +1,6 @@
+name1 = input ("What is your First Classmate\'s name? ")
+name2 = input ("What is your Second Classmate\'s name? ")
+name3 = input ("What is your Third Classmate\'s name? ")
+print ("Hello " + name1 + "!")
+print ("Hello " + name2 + "!")
+print ("Hello " + name3 + "!")

@@ -1,0 +1,6 @@
+name = input ("What is your name? ")
+age = input ("How old are you? ")
+height = input ("Please enter your height (in meters). ")
+print ("Name: " + name)
+print ("Age: " + age)
+print ("Height: " + str(height))
