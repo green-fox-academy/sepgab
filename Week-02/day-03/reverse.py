@@ -4,5 +4,8 @@
 # - Print the elements of the reversed `aj`
 
 aj = [3, 4, 5, 6, 7]
+
+print(aj[::-1])
+
 aj.reverse()
 print(aj)
