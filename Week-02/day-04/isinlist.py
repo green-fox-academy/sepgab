@@ -5,16 +5,13 @@
 listOfNumbers = [2, 4, 6, 8, 10, 12, 14, 16]
 
 def finder(list):
+    n = len(list)
     condition = [False, False, False, False]
-
-    for a in range(4):
-        for nr in range(0, len(list)-1):
-            if list[nr] == 4 * a:
-                condition[a] = True
-            else:
-                pass
-
-    if condition == True:
+    for x in range(5):
+        for nr in range(n):
+            if list[nr] == 4 * x:
+                condition[x-1] = True
+    if condition == [True, True, True, True]:
         print(True)
     else:
         print(False)
