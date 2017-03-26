@@ -14,10 +14,25 @@ students = [
 # - Sum of the age of people who have lass than 5 candies
 
 def candies(list):
-    
+    for i in range(0, len(list)):
+        for key, value in list[i].items():
+            if key == 'candies':
+                print(value)
 
-    print(list[2])
+candies(students)
 
-StudentList = ['Rezso', 'Olaf']
+def age_sum(list):
+    list_min_candies =[]
+    total_age = 0
+    for i in range(0, len(list)):
+        for key, value in list[i].items():
+            if key == 'candies':
+                if value < 5:
+                    list_min_candies.append(list[i])
+    for i in range(0, len(list_min_candies)):
+        for key, value in list_min_candies[i].items():
+            if key == 'age':
+                total_age += value
+    print(total_age)
 
-candies(StudentList)
+age_sum(students)
