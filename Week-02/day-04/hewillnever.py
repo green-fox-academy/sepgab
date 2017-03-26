@@ -15,15 +15,15 @@ hashmap = [
     {11: "\n"},
     {3: "say goodbye"}
 ]
-draft = out.split()
-message = []
 
-for i in range(0, len(notSoCrypticMessage)-1, 1):
-    message.append(str(notSoCrypticMessage[i]))
+list_message = []
 
-print(message)
+for i in range(0, len(notSoCrypticMessage)):
+    for j in range(0, len(hashmap)):
+        for key, value in hashmap[j].items():
+            if notSoCrypticMessage[i] == key:
+                list_message.append(value)
 
-for value in range(0, len(message)-1, 1):
-    message[value] = hashmap[value[value]]
+out = ' '.join(list_message)
 
-print(message)
+print(out)

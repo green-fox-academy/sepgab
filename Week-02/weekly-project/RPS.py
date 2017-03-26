@@ -1,9 +1,11 @@
 import random
 #Game start
+print('\n\n\n\n\n\n\n                R O C K - P A P E R - S C I S S O R S                ')
+print('*********************************************************************')
 print('This is a Rock-paper-scissors game wrote in Python for lonely people.')
 
 #Game initialization
-winpts = int(input('Target score: '))
+winpts = int(input('\n\n\n\n\nEnter target score: '))
 score_user = 0
 score_machine = 0
 round_counter = 0
