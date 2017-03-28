@@ -9,5 +9,5 @@ def line_counter(file_name):
     except FileNotFoundError:
         print(0)
 
-line_counter("reversed-lines")
+line_counter("reversed.txt")
 line_counter("reversed-lines.txt")
