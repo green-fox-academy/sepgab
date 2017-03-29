@@ -28,8 +28,4 @@ for i in range(n):
 
     canvas.create_rectangle(x, y, x+5, y+5, fill=list_color)
 
-
-
-
-
 root.mainloop()
