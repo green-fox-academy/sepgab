@@ -27,9 +27,6 @@ def drawlines(width, num, origo_x, origo_y):
         drawlines(width/3, num-1, origo_x-width/3, origo_y)
         drawlines(width/3, num-1, origo_x+width/3, origo_y)
 
-
-
-
 drawlines(300, 3, 150, 150)
 
 
