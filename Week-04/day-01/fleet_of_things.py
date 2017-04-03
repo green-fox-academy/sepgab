@@ -9,21 +9,17 @@ fleet = Fleet()
 # 4. [x] Eat lunch
 
 a = Thing('Get milk')
-a.__str__()
 fleet.add(a)
 
 b = Thing('Remove the obstacles')
-b.__str__()
 fleet.add(b)
 
 c = Thing('Stand up')
 c.complete()
-c.__str__()
 fleet.add(c)
 
 d = Thing('Eat lunch')
 d.complete()
-d.__str__()
 fleet.add(d)
 
 print(fleet)
