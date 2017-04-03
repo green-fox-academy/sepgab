@@ -29,6 +29,7 @@ print(dice.getCurrent())
 for i in range(0, 6):
     while dice.getCurrent(i) != 6:
         dice.reroll(i)
+
 print(dice.getCurrent())
 #dice.reroll(1)
 #print(dice.getCurrent(3))
