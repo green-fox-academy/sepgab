@@ -1,4 +1,4 @@
-class Person:
+class Person():
     def __init__(self, name, age, gender):
         self.name = str(name)
         self.age = int(age)
@@ -10,11 +10,9 @@ class Person:
     def get_goal(self):
         print('My goal is: Live for the moment!')
 
-class Student:
+class Student(Person):
     def __init__(self, name, age, gender, prev_org):
-        self.name = str(name)
-        self.age = int(age)
-        self.gender = str('')
+        super().__init__(name, age, gender)
         self.prev_org = str('')
         self.skipped_days = int(0)
 
@@ -27,11 +25,9 @@ class Student:
     def skip_days(self, number_of_days=1):
         self.skipped_days += number_of_days
 
-class Mentor:
+class Mentor(Person):
     def __init__(self, name, age, gender, level):
-        self.name = str(name)
-        self.age = int(age)
-        self.gender = str('')
+        super().__init__(name, age, gender)
         self.level= str('')
 
     def introduce(self):
@@ -40,11 +36,9 @@ class Mentor:
     def get_goal(self):
         print('My goal is: Educate brilliant junior software developers.')
 
-class Sponsor:
+class Sponsor(Person):
     def __init__(self, name, age, gender, company):
-        self.name = str(name)
-        self.age = int(age)
-        self.gender = str('')
+        super().__init__(name, age, gender)
         self.company = str(company)
         self.hired_students = 0
 
@@ -57,6 +51,23 @@ class Sponsor:
     def hire(self):
         self.hired_students += 1
         return self.hired_students
+
+class LagopusClass():
+    def __init__(self, class_name):
+        self.name = class_name
+        self.students = []
+        self.mentors = []
+
+    def add_student(self, Student):
+        self.students.append(Student)
+
+    def add_mentor(self, Mentor):
+        self.mentors.append(Mentor)
+
+    def info(self):
+        self.students_size = str(len(self.students))
+        self.mentors_size = str(len(self.mentors))
+        print('Lagopus ' + self.name + ' class has ' + self.students_size + ' students and ' + self.mentors_size + ' mentors.')
 
 
 
@@ -90,3 +101,10 @@ for i in range(3):
 for member in people:
     member.introduce()
     member.get_goal()
+
+badass = LagopusClass('BADA55')
+badass.add_student(student)
+badass.add_student(john)
+badass.add_mentor(mentor)
+badass.add_mentor(gandhi)
+badass.info()
