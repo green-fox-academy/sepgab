@@ -18,7 +18,7 @@ class Aircrafts():
         print(self.type)
 
     def get_status(self):
-        print('Type ' + self.type + ', Ammo: ' + str(self.ammo_level) + ', Base Damage: ' + str(self.base_damage) + ', All Damage: ' + str(self.ammo_level*self.base_damage) + '\n')
+        print('Type ' + self.type + ', Ammo: ' + str(self.ammo_level) + ', Base Damage: ' + str(self.base_damage) + ', All Damage: ' + str(self.ammo_level*self.base_damage))
 
 class F16(Aircrafts):
     def __init__(self):
@@ -43,7 +43,7 @@ class Carrier():
             self.ammo_level = init_ammo
         else:
             self.ammo_level = self.store_ammo
-        self.health = 1000
+        self.health = 3000
 
     def add_aircraft(self, aircraft):
         self.aircraft_list.append(aircraft)
@@ -59,39 +59,49 @@ class Carrier():
                 self.ammo_needed += aircraft.max_ammo - aircraft.ammo_level
             if self.ammo_needed <= self.ammo_level:
                 for aircraft in self.aircraft_list:
-                    aircraft.refill(aircraft.max_ammo - aircraft.ammo_level)
-                    self.ammo_level -= aircraft.max_ammo - aircraft.ammo_level
+                    self.ammo_level -= aircraft.max_ammo-aircraft.ammo_level
+                    aircraft.refill(aircraft.max_ammo-aircraft.ammo_level)
             else:
-                while self.ammo_level < 0:
+                while self.ammo_level > 0:
                     for aircraft in self.aircraft_list:
                         if aircraft.type == 'F35':
                             if self.ammo_level >= aircraft.max_ammo - aircraft.ammo_level:
+                                self.ammo_level -= aircraft.max_ammo-aircraft.ammo_level
                                 aircraft.refill(aircraft.max_ammo - aircraft.ammo_level)
-                                self.ammo_level -= aircraft.max_ammo - aircraft.ammo_level
                             else:
                                 aircraft.refill(self.ammo_level)
                                 self.ammo_level = 0
                     for aircraft in self.aircraft_list:
                         if aircraft.type == 'F16':
                             if self.ammo_level >= aircraft.max_ammo - aircraft.ammo_level:
+                                self.ammo_level -= aircraft.max_ammo-aircraft.ammo_level
                                 aircraft.refill(aircraft.max_ammo - aircraft.ammo_level)
-                                self.ammo_level -= aircraft.max_ammo - aircraft.ammo_level
                             else:
                                 aircraft.refill(self.ammo_level)
                                 self.ammo_level = 0
             return self.ammo_level
 
+
     def fight(self, carrier):
-        pass
-
-
-
-    def get_status(self):
         self.total_damage = 0
         for aircraft in self.aircraft_list:
-            self.total_damage += aircraft.ammo_level*aircraft.base_damage
+            aircraft.fight()
+            self.total_damage += aircraft.damage_caused
+        carrier.health -= self.total_damage
 
-        print('Aircraft count: ' + str(len(self.aircraft_list)) + ', Ammo Storage: ' + str(self.ammo_level) + ', Total Damage: ' + str(self.total_damage))
+    def get_status(self):
+        if self.health <= 0:
+            print('It\'s dead Jim :(')
+        else:
+            self.total_damage = 0
+            for aircraft in self.aircraft_list:
+                self.total_damage += aircraft.ammo_level*aircraft.base_damage
+
+            print('Aircraft count: ' + str(len(self.aircraft_list)) + ', Ammo level: ' + str(self.ammo_level) + ', Total Damage: ' + str(self.total_damage))
+            print('Aircrafts:')
+            for aircraft in self.aircraft_list:
+                aircraft.get_status()
+            print('\n')
 
 
 
@@ -104,6 +114,8 @@ aircraft3 = F16()
 aircraft4 = F35()
 aircraft5 = F16()
 aircraft6 = F35()
+
+aircraft7 = F16()
 
 # print(aircraft1.ammo_level)
 # print(aircraft1.max_ammo)
@@ -125,6 +137,18 @@ carrier1.add_aircraft(aircraft4)
 carrier1.add_aircraft(aircraft5)
 carrier1.add_aircraft(aircraft6)
 
+carrier2.add_aircraft(aircraft7)
+
 carrier1.get_status()
+carrier2.get_status()
 carrier1.fill()
 carrier1.get_status()
+carrier1.fight(carrier2)
+carrier1.get_status()
+carrier2.get_status()
+carrier1.fill()
+carrier1.get_status()
+carrier1.fight(carrier2)
+carrier1.get_status()
+carrier2.get_status()
+carrier1.fill()

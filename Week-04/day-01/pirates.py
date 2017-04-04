@@ -59,12 +59,12 @@ class Parrot:
 
 class Ship:
     def __init__(self):
-        self.nr_pirates = 0
+        self.pirate_list = []
         self.captain = 0
 
     def fill_ship(self):
         self.captain = 1
-        self.nr_pirates = random.randint(0,100)
+        self.pirate_list.append() = random.randint(0,100)
 
 
 
