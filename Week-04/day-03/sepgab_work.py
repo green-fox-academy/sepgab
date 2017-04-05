@@ -25,5 +25,5 @@ def letter_counter(string):
         if letter not in dict_letters:
             dict_letters[letter] = 1
         else:
-            dict_numbers[letter] += 1
-            
+            dict_letters[letter] += 1
+    return dict_letters

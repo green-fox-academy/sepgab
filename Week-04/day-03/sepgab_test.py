@@ -1,5 +1,5 @@
 import unittest
-from sepgab_work import Apples, Operations, anagram_checker
+from sepgab_work import Apples, Operations, anagram_checker, letter_counter
 
 class TestApples(unittest.TestCase):
 
@@ -45,8 +45,16 @@ class TestAnagrams(unittest.TestCase):
     def test_anagrams_function_more_letters_tricky(self):
         self.assertEqual(anagram_checker('abba ', 'babab'), False)
 
+class TestLetterCounter(unittest.TestCase):
 
+    def test_letter_counting_for_empty_string(self):
+        self.assertEqual(letter_counter(''), {})
 
+    def test_letter_counting_for_one_character(self):
+        self.assertEqual(letter_counter('d'), {'d': 1})
+
+    def test_letter_counting_for_more_characters(self):
+        self.assertEqual(letter_counter('Alma Ata'), {'A': 2, 'l': 1, 'm': 1, 'a': 2, 't': 1, ' ': 1})
 
 
 
