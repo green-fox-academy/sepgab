@@ -35,3 +35,16 @@ def fibonacci(n):
         return 1
     else:
         return fibonacci(n-1) + fibonacci(n-2)
+
+class Sharpie:
+    def __init__(self, color, width):
+        self.color = str(color)
+        self.width = float(width)
+        self.ink_amount = float(100)
+
+    def use(self, num):
+        if num <= self.ink_amount:
+            self.ink_amount -= num
+        else:
+            self.ink_amount = 0
+        return self.ink_amount

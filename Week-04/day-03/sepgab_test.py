@@ -1,5 +1,5 @@
 import unittest
-from sepgab_work import Apples, Operations, anagram_checker, letter_counter, fibonacci
+from sepgab_work import Apples, Operations, anagram_checker, letter_counter, fibonacci, Sharpie
 
 class TestApples(unittest.TestCase):
 
@@ -75,6 +75,37 @@ class TestFibonacci(unittest.TestCase):
 
     def test_fibonacci_ten(self):
         self.assertEqual(fibonacci(5), 3)
+
+class TestSharpie(unittest.TestCase):
+
+    def test_sharpie_init_color(self):
+        pen = Sharpie('black', 100)
+        self.assertEqual(pen.color, 'black')
+        self.assertEqual(pen.width, 100)
+
+    def test_sharpie_init_color(self):
+        pen = Sharpie('black', 100)
+        self.assertEqual(pen.color, 'black')
+        self.assertEqual(pen.width, 100)
+
+    def test_sharpie_use_some(self):
+        pen = Sharpie('black', 100)
+        pen.use(10)
+        self.assertEqual(pen.ink_amount, 90)
+
+    def test_sharpie_use_all(self):
+        pen = Sharpie('black', 100)
+        pen.use(100)
+        self.assertEqual(pen.ink_amount, 0)
+
+    def test_sharpie_use_more_than_all(self):
+        pen = Sharpie('black', 100)
+        pen.use(120)
+        self.assertEqual(pen.ink_amount, 0)
+
+
+
+
 
 
 
