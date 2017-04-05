@@ -74,7 +74,7 @@ class TestFibonacci(unittest.TestCase):
         self.assertEqual(fibonacci(4), 2)
 
     def test_fibonacci_ten(self):
-        self.assertEqual(fibonacci(10), 34)
+        self.assertEqual(fibonacci(5), 3)
 
 
 

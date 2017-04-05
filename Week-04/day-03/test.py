@@ -20,11 +20,23 @@ class TestExtend(unittest.TestCase):
     def test_max_of_three_third(self):
         self.assertEqual(extend.max_of_three(3, 4, 5), 5)
 
+    def test_max_of_three_second(self):
+        self.assertEqual(extend.max_of_three(3, 6, 5), 6)
+
+    def test_max_of_three_two_equals(self):
+        self.assertEqual(extend.max_of_three(3, 8, 8), 8)
+
     def test_median_four(self):
         self.assertEqual(extend.median([7,5,3,5]), 5)
 
     def test_median_five(self):
         self.assertEqual(extend.median([1,2,3,4,5]), 3)
+
+    def test_median_two(self):
+        self.assertEqual(extend.median([1,2]), 1.5)
+
+    def test_median_three(self):
+        self.assertEqual(extend.median([1,2, 4]), 2)
 
     def test_is_vovel_a(self):
         self.assertTrue(extend.is_vovel('a'))
@@ -32,11 +44,17 @@ class TestExtend(unittest.TestCase):
     def test_is_vovel_u(self):
         self.assertTrue(extend.is_vovel('u'))
 
+    def test_is_vovel_uu(self):
+        self.assertTrue(extend.is_vovel('ú'))
+
     def test_translate_bemutatkozik(self):
         self.assertEqual(extend.translate('bemutatkozik'), 'bevemuvutavatkovozivik')
 
     def test_translate_kolbice(self):
         self.assertEqual(extend.translate('kolbice'), 'kovolbiviceve')
+
+    def test_translate_teve(self):
+        self.assertEqual(extend.translate('teve'), 'teveveve')
 
 if __name__ == '__main__':
     unittest.main()
