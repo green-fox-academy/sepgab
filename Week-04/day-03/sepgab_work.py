@@ -27,3 +27,11 @@ def letter_counter(string):
         else:
             dict_letters[letter] += 1
     return dict_letters
+
+def fibonacci(n):
+    if n <= 1:
+        return 0
+    if n == 2:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)

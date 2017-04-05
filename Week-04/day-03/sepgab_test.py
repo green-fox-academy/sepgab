@@ -1,5 +1,5 @@
 import unittest
-from sepgab_work import Apples, Operations, anagram_checker, letter_counter
+from sepgab_work import Apples, Operations, anagram_checker, letter_counter, fibonacci
 
 class TestApples(unittest.TestCase):
 
@@ -55,6 +55,27 @@ class TestLetterCounter(unittest.TestCase):
 
     def test_letter_counting_for_more_characters(self):
         self.assertEqual(letter_counter('Alma Ata'), {'A': 2, 'l': 1, 'm': 1, 'a': 2, 't': 1, ' ': 1})
+
+class TestFibonacci(unittest.TestCase):
+
+    def test_fibonacci_zero(self):
+        self.assertEqual(fibonacci(0), 0)
+
+    def test_fibonacci_one(self):
+        self.assertEqual(fibonacci(1), 0)
+
+    def test_fibonacci_two(self):
+        self.assertEqual(fibonacci(2), 1)
+
+    def test_fibonacci_three(self):
+        self.assertEqual(fibonacci(3), 1)
+
+    def test_fibonacci_four(self):
+        self.assertEqual(fibonacci(4), 2)
+
+    def test_fibonacci_ten(self):
+        self.assertEqual(fibonacci(10), 34)
+
 
 
 
