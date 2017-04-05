@@ -48,3 +48,22 @@ class Sharpie:
         else:
             self.ink_amount = 0
         return self.ink_amount
+
+class Animal:
+
+    def __init__(self, hunger=50, thirst=50):
+        self.hunger = int(hunger)
+        self.thirst = int(thirst)
+
+    def eat(self):
+        self.hunger -= 1
+        return self.hunger
+
+    def drink(self):
+        self.thirst -= 1
+        return self.thirst
+
+    def play(self):
+        self.hunger += 1
+        self.thirst += 1
+        return self.hunger, self.thirst

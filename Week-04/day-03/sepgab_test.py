@@ -1,5 +1,5 @@
 import unittest
-from sepgab_work import Apples, Operations, anagram_checker, letter_counter, fibonacci, Sharpie
+from sepgab_work import Apples, Operations, anagram_checker, letter_counter, fibonacci, Sharpie, Animal
 
 class TestApples(unittest.TestCase):
 
@@ -81,11 +81,9 @@ class TestSharpie(unittest.TestCase):
     def test_sharpie_init_color(self):
         pen = Sharpie('black', 100)
         self.assertEqual(pen.color, 'black')
-        self.assertEqual(pen.width, 100)
 
-    def test_sharpie_init_color(self):
+    def test_sharpie_init_width(self):
         pen = Sharpie('black', 100)
-        self.assertEqual(pen.color, 'black')
         self.assertEqual(pen.width, 100)
 
     def test_sharpie_use_some(self):
@@ -102,6 +100,34 @@ class TestSharpie(unittest.TestCase):
         pen = Sharpie('black', 100)
         pen.use(120)
         self.assertEqual(pen.ink_amount, 0)
+
+class TestAnimal(unittest.TestCase):
+
+    def test_animal_init_with_parameters(self):
+        animal1 = Animal(80, 100)
+        self.assertEqual(animal1.hunger, 80)
+        self.assertEqual(animal1.thirst, 100)
+
+    def test_animal_init_without_parameters(self):
+        animal1 = Animal()
+        self.assertEqual(animal1.hunger, 50)
+        self.assertEqual(animal1.thirst, 50)
+
+    def test_animal_eat(self):
+        animal1 = Animal()
+        animal1.eat()
+        self.assertEqual(animal1.hunger, 49)
+
+    def test_animal_drink(self):
+        animal1 = Animal()
+        animal1.drink()
+        self.assertEqual(animal1.thirst, 49)
+
+    def test_animal_play(self):
+        animal1 = Animal()
+        animal1.play()
+        self.assertEqual(animal1.hunger, 51)
+        self.assertEqual(animal1.thirst, 51)
 
 
 
