@@ -2,7 +2,7 @@ from tkinter import *
 
 root = Tk()
 
-canvas = Canvas(root, width='300', height='500')
+canvas = Canvas(root, width='600', height='800')
 canvas.pack()
 
 def drawkoch(x1, y1, x2, y2, num):
@@ -22,6 +22,6 @@ def drawkoch_snowflakes(x1, y1, x2, y2, num):
     drawkoch(x2, y2, x1+(x2-x1)/2, y1+(x2-x1)*3**0.5/2, num)
     drawkoch(x1+(x2-x1)/2, y1+(x2-x1)*3**0.5/2, x1, y1, num)
 
-drawkoch_snowflakes(10, 150, 290, 150, 4)
+drawkoch_snowflakes(10, 200, 590, 200, 4)
 
 root.mainloop()

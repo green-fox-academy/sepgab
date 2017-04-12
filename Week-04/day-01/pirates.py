@@ -29,22 +29,24 @@ class Pirate:
     def pass_out(self):
         self.passed_out = True
 
-    def brawl(self, x, parrot=''):
-        if x.alive == True:
+    def brawl(self, other_pirate, parrot=''):
+        if other_pirate.alive == True:
             brawl_output = random.randint(0,3)
             if brawl_output == 0:
                 self.alive = False
                 print('Attacker is dead.')
                 parrot.attacker()
             elif brawl_output == 1:
-                x.die()
+                other_pirate.die()
                 print('Attacked pirate is dead.')
                 parrot.attacked()
             else:
                 self.passed_out = True
-                x.pass_out()
+                other_pirate.pass_out()
                 print('Attacker and attacked pirates are both passed out.')
                 parrot.passed_out()
+    def get_status(self):
+        pass
 
 class Parrot:
 
@@ -61,10 +63,13 @@ class Ship:
     def __init__(self):
         self.pirate_list = []
         self.captain = 0
+        self.pirate_counter = len(self.pirate_list)
 
     def fill_ship(self):
         self.captain = 1
-        self.pirate_list.append() = random.randint(0,100)
+        self.pirate_gen = random.randint(0,100)
+        for i in self.pirate_gen:
+            self.pirate_list.append(i)
 
 
 

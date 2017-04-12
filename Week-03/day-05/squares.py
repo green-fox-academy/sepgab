@@ -2,7 +2,7 @@ from tkinter import *
 
 root = Tk()
 
-canvas = Canvas(root, width='300', height='300')
+canvas = Canvas(root, width='600', height='600')
 canvas.pack()
 
 def drawsquares(size, num):
@@ -11,15 +11,15 @@ def drawsquares(size, num):
     c = a+(b-a)*b/(a+b)
     multiplier = c*2/3
     if num == 1:
-        canvas.create_polygon(150+size, 150-size/2, 150+size/2, 150+size, 150-size, 150+size/2, 150-size/2, 150-size, fill='red', outline='black')
-        canvas.create_polygon(150+size*a, 150-size*b, 150+size*b, 150+size*a, 150-size*a, 150+size*b, 150-size*b, 150-size*a, fill='orange', outline='black')
-        canvas.create_polygon(150+size*c, 150, 150, 150+size*c, 150-size*c, 150, 150, 150-size*c, fill='yellow', outline='black')
+        canvas.create_polygon(300+size, 300-size/2, 300+size/2, 300+size, 300-size, 300+size/2, 300-size/2, 300-size, fill='red', outline='black')
+        canvas.create_polygon(300+size*a, 300-size*b, 300+size*b, 300+size*a, 300-size*a, 300+size*b, 300-size*b, 300-size*a, fill='orange', outline='black')
+        canvas.create_polygon(300+size*c, 300, 300, 300+size*c, 300-size*c, 300, 300, 300-size*c, fill='yellow', outline='black')
     else:
-        canvas.create_polygon(150+size, 150-size/2, 150+size/2, 150+size, 150-size, 150+size/2, 150-size/2, 150-size, fill='red', outline='black')
-        canvas.create_polygon(150+size*a, 150-size*b, 150+size*b, 150+size*a, 150-size*a, 150+size*b, 150-size*b, 150-size*a, fill='orange', outline='black')
-        canvas.create_polygon(150+size*c, 150, 150, 150+size*c, 150-size*c, 150, 150, 150-size*c, fill='yellow', outline='black')
+        canvas.create_polygon(300+size, 300-size/2, 300+size/2, 300+size, 300-size, 300+size/2, 300-size/2, 300-size, fill='red', outline='black')
+        canvas.create_polygon(300+size*a, 300-size*b, 300+size*b, 300+size*a, 300-size*a, 300+size*b, 300-size*b, 300-size*a, fill='orange', outline='black')
+        canvas.create_polygon(300+size*c, 300, 300, 300+size*c, 300-size*c, 300, 300, 300-size*c, fill='yellow', outline='black')
         drawsquares(size*multiplier, num-1)
 
-drawsquares(150, 10)
+drawsquares(300, 10)
 
 root.mainloop()
