@@ -22,25 +22,28 @@ class Character():
 
 class Player(Character):
 
-    def __init__(self, x=0, y=0):
-        self.pos_x = 0
-        self.pos_y = 0
+    def __init__(self):
         self.char_down = PhotoImage(file="hero-down.png")
         self.char_left = PhotoImage(file="hero-left.png")
         self.char_right = PhotoImage(file="hero-right.png")
         self.char_up = PhotoImage(file="hero-up.png")
-        self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=self.char_down)
         self.hp = 20 + 3 * random.randint(1, 6)
         self.hp_max = self.hp
         self.dp = 2 * random.randint(1, 6)
         self.sp = 5 + random.randint(1, 6)
         self.hero_level = 1
+        self.place_hero()
+
+    def place_hero(self):
+        self.pos_x = 0
+        self.pos_y = 0
+        self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=self.char_down)
 
     def move(self, x, y, direction):
         canvas.delete(self.hero)
         self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=direction)
         if 0 <= x <= 9 and 0 <= y <= 9:
-            if map_level_1[y][x] == 1:
+            if map_level[y][x] == 1:
                 canvas.delete(self.hero)
                 self.pos_x = x
                 self.pos_y = y
@@ -78,14 +81,12 @@ class Enemy(Character):
 
     def __init__(self):
         self.skeleton = PhotoImage(file="skeleton.png")
-        self.number_of_skeletons = random.randint(2, 5)
-        self.skeleton_counter = 0
         self.boss = PhotoImage(file="boss.png")
-        self.boss_exist = False
         self.place_boss()
         self.place_skeletons()
 
     def place_boss(self):
+        self.boss_exist = False
         while self.boss_exist == False:
             self.pos_x = random.randint(0, 9)
             self.pos_y = random.randint(0, 9)
@@ -97,6 +98,8 @@ class Enemy(Character):
                 map_level[self.pos_y][self.pos_x] = 'boss'
 
     def place_skeletons(self):
+        self.number_of_skeletons = random.randint(2, 5)
+        self.skeleton_counter = 0
         while self.skeleton_counter < self.number_of_skeletons:
             self.pos_x = random.randint(0, 9)
             self.pos_y = random.randint(0, 9)
@@ -160,30 +163,36 @@ class GameLogic():
         if player.hp == 0:
             screen.game_over()
         else:
+            screen.battle_won()
             if map_level[player.pos_y][player.pos_x] == 'skeleton':
-                if random.randint(1, enemy.skeleton_counter) == 1:
+                if self.got_key == False and random.randint(1, enemy.skeleton_counter) == 1:
                     self.got_key = True
                     screen.got_key()
                 enemy.skeleton_counter -= 1
             if map_level[player.pos_y][player.pos_x] == 'boss':
                 self.boss_killed = True
+                enemy.boss_exist = False
                 screen.boss_ko()
             map_level[player.pos_y][player.pos_x] = 1
-            screen.battle_won()
             player.level_up()
+            screen.render_quest()
         if self.got_key == True and self.boss_killed == True:
             player.new_area()
             screen.level_completed()
             self.new_area()
 
     def new_area(self):
-        pass
-
-
-
-
-
-
+        canvas.delete("all")
+        self.level += 1
+        self.got_key = False
+        self.boss_killed = False
+        map_generator()
+        screen.render_map(map_level)
+        player.place_hero()
+        enemy.place_boss()
+        enemy.place_skeletons()
+        screen.render_quest()
+        screen.hero_stats()
 
 class Render():
 
@@ -192,9 +201,7 @@ class Render():
         self.wall_tile = PhotoImage(file="wall.png")
         self.logo = PhotoImage(file="wanderer_logo.png")
         self.render_map(map_level)
-        canvas.create_image(720, 0, anchor=NW, image=self.logo)
         self.render_quest()
-
 
     def draw_floor(self, x, y):
         canvas.create_image(x,y, anchor=NW, image=self.floor_tile)
@@ -203,6 +210,7 @@ class Render():
         canvas.create_image(x,y, anchor=NW, image=self.wall_tile)
 
     def render_map(self, level_map):
+        canvas.create_image(720, 0, anchor=NW, image=self.logo)
         for y in range(len(level_map)):
             for x in range(len(level_map[y])):
                 if level_map[y][x] == 1:
@@ -224,7 +232,7 @@ class Render():
             self.label_hero.destroy()
         except AttributeError:
             pass
-        self.info_hero = 'Hero stats:\nHero level: ' + str(player.hero_level) + '\nHealth: ' + str(player.hp) + '/' +  str(player.hp_max) + '\nSP: ' + str(player.sp) + '\nDP: ' + str(player.dp)
+        self.info_hero = 'Hero stats:\nHero level: ' + str(player.hero_level) + '\nHealth: ' + str(int(player.hp)) + '/' +  str(player.hp_max) + '\nSP: ' + str(player.sp) + '\nDP: ' + str(player.dp)
         self.label_hero = Label(root, text=self.info_hero, fg="red", font=("Trajan Pro", 16))
         self.label_hero.place(x=743, y=360)
 
@@ -233,7 +241,7 @@ class Render():
             self.label_enemy.destroy()
         except AttributeError:
             pass
-        self.info_enemy = 'Enemy stats:\nHealth: ' + str(enemy.hp) + '/' +  str(enemy.hp_max) + '\nSP: ' + str(enemy.sp) + '\nDP: ' + str(enemy.dp)
+        self.info_enemy = 'Enemy stats:\nHealth: ' + str(int(enemy.hp)) + '/' +  str(enemy.hp_max) + '\nSP: ' + str(enemy.sp) + '\nDP: ' + str(enemy.dp)
         self.label_enemy = Label(root, text=self.info_enemy, fg="blue", font=("Trajan Pro", 16))
         self.label_enemy.place(x=745, y=500)
 
@@ -266,14 +274,14 @@ class Render():
 
     def boss_ko(self):
         self.label_boss_ko = Label(root, text='You killed the boss!', bg="white", fg="red", font=("Trajan Pro", 42))
-        self.label_boss_ko.place(x=50, y=300)
+        self.label_boss_ko.place(x=30, y=300)
         canvas.update()
         sleep(1)
         self.label_boss_ko.destroy()
 
     def got_key(self):
         self.label_got_key = Label(root, text='You found the key!', bg="white", fg="red", font=("Trajan Pro", 42))
-        self.label_got_key.place(x=60, y=300)
+        self.label_got_key.place(x=50, y=300)
         canvas.update()
         sleep(1)
         self.label_got_key.destroy()
@@ -294,16 +302,13 @@ class Render():
         self.label_enemy.destroy()
         canvas.create_image(72 * player.pos_x, 72 * player.pos_y, anchor=NW, image=screen.floor_tile)
         player.hero = canvas.create_image(72 * player.pos_x, 72 * player.pos_y, anchor=NW, image=player.char_down)
-        self.render_quest()
 
     def level_completed(self):
         self.label_completed = Label(root, text='Level completed!', bg="white", fg="red", font=("Trajan Pro", 54))
-        self.label_completed.place(x=30, y=300)
+        self.label_completed.place(x=10, y=300)
         canvas.update()
         sleep(2)
         self.label_completed.destroy()
-
-
 
 
 map_level = [
@@ -317,6 +322,33 @@ map_level = [
 [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
 [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
 [1, 1, 1, 0, 1, 0, 0, 1, 1, 1]]
+
+def map_generator():
+    i = random.randint(1, 2)
+    if i == 1:
+        map_level = [
+        [1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 1, 0, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 0, 1, 0, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 0, 1, 0, 0, 1, 1, 1]]
+    if i == 2:
+        map_level = [
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+        [0, 1, 0, 0, 1, 0, 1, 0, 0, 1],
+        [0, 1, 0, 0, 1, 1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 1, 0, 0, 1],
+        [0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 1, 0, 0, 1, 0, 0]]
 
 
 game = GameLogic()
