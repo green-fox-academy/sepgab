@@ -6,9 +6,6 @@ root = Tk()
 canvas = Canvas(root, width='930', height='720')
 canvas.pack()
 
-
-
-
 class Character():
 
     def strike(self, defender):
@@ -18,7 +15,6 @@ class Character():
             screen.strike_1()
         else:
             screen.strike_0()
-
 
 class Player(Character):
 
@@ -37,7 +33,9 @@ class Player(Character):
     def place_hero(self):
         self.pos_x = 0
         self.pos_y = 0
+        self.move_counter = 0
         self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=self.char_down)
+        map_level[self.pos_y][self.pos_x] = 'hero'
 
     def move(self, x, y, direction):
         canvas.delete(self.hero)
@@ -45,17 +43,26 @@ class Player(Character):
         if 0 <= x <= 9 and 0 <= y <= 9:
             if map_level[y][x] == 1:
                 canvas.delete(self.hero)
+                map_level[self.pos_y][self.pos_x] = 1
                 self.pos_x = x
                 self.pos_y = y
                 self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=direction)
+                map_level[self.pos_y][self.pos_x] = 'hero'
             elif map_level[y][x] == 0:
                 pass
             else:
                 canvas.delete(self.hero)
+                map_level[self.pos_y][self.pos_x] = 1
                 self.pos_x = x
                 self.pos_y = y
                 self.hero = canvas.create_image(72 * self.pos_x, 72 * self.pos_y, anchor=NW, image=direction)
                 game.battle()
+                map_level[self.pos_y][self.pos_x] = 'hero'
+
+        self.move_counter += 1
+        if self.move_counter % 2 == 0:
+            enemy.move('boss')
+            enemy.move('skeleton')
 
     def level_up(self):
         screen.leveling_up()
@@ -85,30 +92,71 @@ class Enemy(Character):
         self.place_boss()
         self.place_skeletons()
 
+    def draw_enemy(self, x, y, char):
+        self.char = char
+        if self.char == 'skeleton':
+            self.enemy = self.skeleton
+        elif self.char == 'boss':
+            self.enemy = self.boss
+        canvas.create_image(72*x, 72*y, anchor=NW, image=self.enemy)
+        map_level[y][x] = self.char
+
     def place_boss(self):
         self.boss_exist = False
         while self.boss_exist == False:
-            self.pos_x = random.randint(0, 9)
-            self.pos_y = random.randint(0, 9)
-            if self.pos_x == 0 and self.pos_y == 0:
+            x = random.randint(0, 9)
+            y = random.randint(0, 9)
+            if x == 0 and y == 0:
                 pass
-            elif map_level[self.pos_y][self.pos_x] == 1:
-                canvas.create_image(72*self.pos_x, 72*self.pos_y, anchor=NW, image=self.boss)
+            elif map_level[y][x] == 1:
+                self.draw_enemy(x, y, 'boss')
                 self.boss_exist = True
-                map_level[self.pos_y][self.pos_x] = 'boss'
 
     def place_skeletons(self):
         self.number_of_skeletons = random.randint(2, 5)
         self.skeleton_counter = 0
         while self.skeleton_counter < self.number_of_skeletons:
-            self.pos_x = random.randint(0, 9)
-            self.pos_y = random.randint(0, 9)
-            if self.pos_x == 0 and self.pos_y == 0:
+            x = random.randint(0, 9)
+            y = random.randint(0, 9)
+            if x == 0 and y == 0:
                 pass
-            elif map_level[self.pos_y][self.pos_x] == 1:
-                canvas.create_image(72*self.pos_x, 72*self.pos_y, anchor=NW, image=self.skeleton)
+            elif map_level[y][x] == 1:
+                self.draw_enemy(x, y, 'skeleton')
                 self.skeleton_counter += 1
-                map_level[self.pos_y][self.pos_x] = 'skeleton'
+
+    def move(self, char):
+        self.char = char
+        for y in range(len(map_level)):
+            for x in range(len(map_level[y])):
+                if map_level[y][x] == self.char:
+                    if  0 <= x+1 <= 9 and map_level[y][x+1] == 1 or 0 <= x-1 <= 9 and map_level[y][x-1] == 1 or 0 <= y+1 <= 9 and map_level[y+1][x] == 1 or 0 <= y-1 <= 9 and map_level[y-1][x] == 1:
+                        self.moved = False
+                        while self.moved == False:
+                            self.random_factor = random.randint(1, 4)
+                            if self.random_factor == 1:
+                                if 0 <= x+1 <= 9 and 0 <= y <= 9:
+                                    if map_level[y][x+1] == 1:
+                                        self.draw_enemy(x+1, y, self.char)
+                                        screen.draw_floor(x, y)
+                                        self.moved = True
+                            elif self.random_factor == 2:
+                                if 0 <= x-1 <= 9 and 0 <= y <= 9:
+                                    if map_level[y][x-1] == 1:
+                                        self.draw_enemy(x-1, y, self.char)
+                                        screen.draw_floor(x, y)
+                                        self.moved = True
+                            elif self.random_factor == 3:
+                                if 0 <= x <= 9 and 0 <= y-1 <= 9:
+                                    if map_level[y-1][x] == 1:
+                                        self.draw_enemy(x, y-1, self.char)
+                                        screen.draw_floor(x, y)
+                                        self.moved = True
+                            elif self.random_factor == 4:
+                                if 0 <= x <= 9 and 0 <= y+1 <= 9:
+                                    if map_level[y+1][x] == 1:
+                                        self.draw_enemy(x, y+1, self.char)
+                                        screen.draw_floor(x, y)
+                                        self.moved = True
 
     def init_enemy(self):
         self.enemy_level = game.level
@@ -128,6 +176,9 @@ class Enemy(Character):
             self.sp = self.enemy_level * random.randint(1, 6) + self.enemy_level
         self.hp_max = self.hp
         screen.enemy_stats()
+
+
+
 
 class GameLogic():
 
@@ -169,11 +220,12 @@ class GameLogic():
                     self.got_key = True
                     screen.got_key()
                 enemy.skeleton_counter -= 1
+                map_level[player.pos_y][player.pos_x] = 1
             if map_level[player.pos_y][player.pos_x] == 'boss':
                 self.boss_killed = True
                 enemy.boss_exist = False
                 screen.boss_ko()
-            map_level[player.pos_y][player.pos_x] = 1
+                map_level[player.pos_y][player.pos_x] = 1
             player.level_up()
             screen.render_quest()
         if self.got_key == True and self.boss_killed == True:
@@ -204,19 +256,21 @@ class Render():
         self.render_quest()
 
     def draw_floor(self, x, y):
-        canvas.create_image(x,y, anchor=NW, image=self.floor_tile)
+        canvas.create_image(72*x, 72*y, anchor=NW, image=self.floor_tile)
+        map_level[y][x] = 1
 
     def draw_wall(self, x, y):
-        canvas.create_image(x,y, anchor=NW, image=self.wall_tile)
+        canvas.create_image(72*x, 72*y, anchor=NW, image=self.wall_tile)
 
-    def render_map(self, level_map):
+    def render_map(self, map):
         canvas.create_image(720, 0, anchor=NW, image=self.logo)
-        for y in range(len(level_map)):
-            for x in range(len(level_map[y])):
-                if level_map[y][x] == 1:
-                    self.draw_floor(72*x, 72*y)
+        for y in range(len(map)):
+            for x in range(len(map[y])):
+                if map[y][x] == 1:
+                    self.draw_floor(x, y)
                 else:
-                    self.draw_wall(72*x, 72*y)
+                    self.draw_wall(x, y)
+        canvas.update()
 
     def render_quest(self):
         try:
@@ -251,18 +305,18 @@ class Render():
 
     def battle_started(self):
         canvas.update()
-        sleep(2)
+        sleep(1)
         self.label_battle_start = Label(root, text='Battle started', bg="white", fg="grey", font=("Trajan Pro", 54))
         self.label_battle_start.place(x=60, y=300)
         canvas.update()
-        sleep(2)
+        sleep(1)
         self.label_battle_start.destroy()
 
     def strike_1(self):
         self.label_strike_1 = Label(root, text='Strike hit!', bg="white", fg="grey", font=("Trajan Pro", 42))
         self.label_strike_1.place(x=185, y=300)
         canvas.update()
-        sleep(2)
+        sleep(1)
         self.label_strike_1.destroy()
 
     def strike_0(self):
@@ -324,19 +378,19 @@ map_level = [
 [1, 1, 1, 0, 1, 0, 0, 1, 1, 1]]
 
 def map_generator():
-    i = random.randint(1, 2)
+    i = random.randint(1, 5)
     if i == 1:
         map_level = [
-        [1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 1, 0, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 0, 1, 0, 0, 1, 1, 1]]
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+        [1, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 1, 0, 0],
+        [0, 1, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 1, 1, 1, 0, 1, 1]]
     if i == 2:
         map_level = [
         [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
@@ -349,6 +403,42 @@ def map_generator():
         [1, 1, 1, 1, 1, 0, 0, 1, 0, 1],
         [1, 0, 0, 0, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 0, 1, 0, 0, 1, 0, 0]]
+    if i == 3:
+        map_level = [
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+        [0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 1, 1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+        [0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
+        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 0, 1, 0, 0, 1, 1, 1]]
+    if i == 4:
+        map_level = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 1, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+    if i == 5:
+        map_level = [
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 1, 0]]
 
 
 game = GameLogic()
