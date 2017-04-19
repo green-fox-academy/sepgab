@@ -1,0 +1,27 @@
+.container {
+  height: 290px;
+  width: 970px;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.container div {
+  height: 190px;
+  width: 190px;
+}
+
+.item_green {
+  background-color: #51d400;
+}
+
+.item_yellow {
+  background-color: #ffd62a;
+  flex-grow: 1
+}
+
+.item_purple {
+  background-color: #b02aff;
+}

@@ -1,9 +1,15 @@
 import random
 
-a = False
-number = 3
+player_list = []
 
-if random.randint(1, number) == 1:
-    a = True
+def player_creator(number):
+    for i in number:
+        'player' + str(i) = 'player started'
+        player_list.append('player' + str(i))
 
-print(a)
+
+x = random.randint(1, 6)
+
+player_creator(x)
+
+print(player_list)
