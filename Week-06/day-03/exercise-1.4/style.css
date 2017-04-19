@@ -1,27 +1,24 @@
 .container {
-  height: 290px;
-  width: 970px;
+  height: 600px;
+  width: 400px;
   background-color: #f2f2f2;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  flex-direction: row-reverse;
-}
-
-.container div {
-  height: 190px;
-  width: 190px;
+  align-items: stretch;
 }
 
 .item_green {
   background-color: #51d400;
+  flex-grow: 1
 }
 
 .item_yellow {
-  background-color: #ffd62a;
+  background-color: #b02aff;
   flex-grow: 1
 }
 
 .item_purple {
-  background-color: #b02aff;
+  background-color: #ffd62a;
+  flex-grow: 2
 }
