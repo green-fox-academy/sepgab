@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title> Simple form </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  </head>
+  <body>
+    <form>
+      <h1>Profil</h1>
+      <div class=dataforms>
+        <div class=personal_data>
+          <h2>Személyes adatok</h2>
+          <h3>Név</h3>
+          <input type="text" name="" required><br>
+          <div class=personal2>
+            <div>
+              <h3>Születési éved</h3>
+              <input type="number" name="" placeholder="pl. 1984">
+            </div>
+            <div>
+              <h3>Nemed</h3>
+              <input type="radio" id="female" name="sex">
+              <label for "female"> nő </label>
+              <input type="radio" id="male" name="sex">
+              <label for "male"> férfi </label>
+            </div>
+          </div>
+          <h3>Milyen márkákat szeretsz?</h3>
+          <div class="marks">
+            <div><input type="checkbox" id=adidas>
+            <label for "adidas"> Adidas </label></div>
+            <div><input type="checkbox" id=apple>
+            <label for "apple"> Apple </label></div>
+            <div><input type="checkbox" id=cocacola>
+            <label for "cocacola"> Coca-Cola </label></div>
+            <div><input type="checkbox" id=mazda>
+            <label for "mazda"> Mazda </label></div>
+            <div><input type="checkbox" id=nike>
+            <label for "nike"> Nike </label></div>
+            <div><input type="checkbox" id=opel>
+            <label for "opel"> Opel </label></div>
+            <div><input type="checkbox" id=rayban>
+            <label for "rayban"> Ray-Ban </label></div>
+            <div><input type="checkbox" id=starbucks>
+            <label for "starbucks"> Starbucks </label></div>
+            <div><input type="checkbox" id=tesla>
+            <label for "tesla"> Tesla </label></div>
+            <div><input type="checkbox" id=yahoo>
+            <label for "yahoo"> Yahoo </label></div>
+          </div>
+          <h4>Többet is választhatsz!</h4>
+        </div>
+        <div class=contact_data>
+          <h2>Kapcsolat</h2>
+          <h3>Telefonszám</h3>
+          <input type="text" name="" placeholder="+36 -- --- ----" required>
+          <h3>E-mail cím</h3>
+          <input type="text" name="" placeholder="nev@domain.hu" required>
+          <h3>Facebook profilod</h3>
+          <input type="text" name="" placeholder="http://www.facebook.com/...">
+          <h3>Twitter profilod</h3>
+          <input type="text" name="" placeholder="http://twitter.com/...">
+          <h3>Milyen házban laksz?</h3>
+          <select name="housetypes">
+            <option value="" disabled selected hidden>Válassz típust!</option>
+            <option value="csaladihaz">Családi ház</option>
+            <option value="tarsashaz">Társasház</option>
+            <option value="panel">Panel</option>
+          </select>
+        </div>
+      </div>
+      <h3>Bemutatkozás</h3>
+      <textarea name="" rows="10" cols="50" placeholder="Írj magadról pár mondatot!" required></textarea>
+      <h3>CV feltöltése</h3>
+      <label for="r">FILE KIVÁLASZTÁSA </label>
+      <input id="r" type="file" hidden>
+      <div class=buttons>
+        <input type="button" id="saveform" value="MENTÉS">
+        <input type="button" id="deleteform" value="ŰRLAP TÖRLÉSE">
+      </div>
+    </form>
+  </body>
+</html>
