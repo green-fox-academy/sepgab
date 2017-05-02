@@ -31,3 +31,13 @@ function greet() {
 }
 
 greet();
+
+function returnTrue() {
+  console.log('lefut');
+  return true
+}
+
+returnTrue()
+
+var i = 10;
+while (i) { console.log(i--); }
