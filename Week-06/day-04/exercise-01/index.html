@@ -4,7 +4,7 @@
     <title> Simple form </title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
   </head>
   <body>
     <form>
@@ -13,7 +13,7 @@
         <div class=personal_data>
           <h2>Személyes adatok</h2>
           <h3>Név</h3>
-          <input type="text" name="" required><br>
+          <input type="text" class="text" name="" required><br>
           <div class=personal2>
             <div>
               <h3>Születési éved</h3>
@@ -55,15 +55,15 @@
         <div class=contact_data>
           <h2>Kapcsolat</h2>
           <h3>Telefonszám</h3>
-          <input type="text" name="" placeholder="+36 -- --- ----" required>
+          <input type="text" class="text" name="" placeholder="+36 -- --- ----" required>
           <h3>E-mail cím</h3>
-          <input type="text" name="" placeholder="nev@domain.hu" required>
+          <input type="text" class="text" name="" placeholder="nev@domain.hu" required>
           <h3>Facebook profilod</h3>
-          <input type="text" name="" placeholder="http://www.facebook.com/...">
+          <input type="text" class="text" name="" placeholder="http://www.facebook.com/...">
           <h3>Twitter profilod</h3>
-          <input type="text" name="" placeholder="http://twitter.com/...">
+          <input type="text" class="text" name="" placeholder="http://twitter.com/...">
           <h3>Milyen házban laksz?</h3>
-          <select name="housetypes">
+          <select name="housetypes" class="text">
             <option value="" disabled selected hidden>Válassz típust!</option>
             <option value="csaladihaz">Családi ház</option>
             <option value="tarsashaz">Társasház</option>
