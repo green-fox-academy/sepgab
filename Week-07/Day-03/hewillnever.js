@@ -17,17 +17,8 @@ var hashmap = {
     3: 'say goodbye '
 };
 
-console.log( typeof notSoCrypticMessage[0] );
-console.log( typeof hashmap );
-console.log( Object.keys(hashmap) );
-
-console.log( hashmap.2 )
-
-notSoCrypticMessage.map(function(el, id) {
-  out += hashmap.el;
+notSoCrypticMessage.forEach(function(el) {
+  out += hashmap[el];
 })
 
-
-
-
-console.log(out)
+console.log( out );
