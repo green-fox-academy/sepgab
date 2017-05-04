@@ -1,5 +1,6 @@
 'use strict'
 
-var output1 = document.getElementsByClassName('output1')[0].innerText;
+var paragraphs = document.querySelectorAll('body p');
 
-console.log ( output1 );
+paragraphs[1].innerHTML = paragraphs[0].innerText;
+paragraphs[2].innerHTML = paragraphs[0].innerHTML;
