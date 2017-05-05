@@ -1,0 +1,119 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+  background: linear-gradient( 90deg, #a1a1a1,  #b1b1b1, #f1f1f1, #b1b1b1, #a1a1a1 );
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  color: #dddddd;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-style: oblique;
+  margin: 10px;
+}
+
+p {
+  height: 40px;
+  color: #cccccc;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.image_cont {
+  position: relative;
+  width:inherit;
+  display: flex;
+  justify-content: center;
+  box-shadow: 5px 5px 10px grey;
+}
+
+.main_image {
+  max-width: 100%;
+  height: 400px;
+}
+
+.leftarrow {
+  position: inherit;
+  width: 80px;
+  left: 0;
+  font-size: 32px;
+  font-family: 'Baloo', cursive;
+  color: grey;
+  border: none;
+  background: linear-gradient( 0deg, #cccccc, #eeeeee );
+  box-shadow: 5px 5px 10px grey;
+}
+
+.rightarrow {
+  position: inherit;
+  width: 80px;
+  right: 0;
+  font-size: 32px;
+  font-family: 'Baloo', cursive;
+  color: grey;
+  border: none;
+  background: linear-gradient( 0deg, #cccccc, #eeeeee );
+  box-shadow: 5px 5px 10px grey;
+  z-index: 1;
+}
+
+.rightarrow:hover, .leftarrow:hover {
+  color: silver;
+}
+
+.description {
+  position: absolute;
+  top: 300px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.thumbnails {
+  width: 700px;
+  height: 80px;
+  margin: 15px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.thumbnails img {
+  max-width: 150px;
+  height: 60px;
+  margin: 10px;
+  border: 3px solid white;
+  border-radius: 8px;
+  box-shadow: 0 20px 30px grey;
+}
+
+.thumbnails img:hover {
+  box-shadow: 0 28px 40px rgb(60,60,60);
+  position: relative;
+  top: -5px;
+}
