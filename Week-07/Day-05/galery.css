@@ -20,25 +20,47 @@ time, mark, audio, video {
 }
 
 body {
-  background: linear-gradient( 90deg, #a1a1a1, #ffffff, #ffffff, #ffffff, #a1a1a1 );
+  background: linear-gradient( 90deg, #a1a1a1, #ffffff, #a1a1a1 );
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 main {
+  position: fixed;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+
 .container {
-  background-color: #aaaaaa;
   width: 700px;
   height: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
+.main_image {
+  max-width: 90%;
+  height: 380px;
+  margin: 10px;
+}
+
+.leftarrow {
+  position: absolute;
+  left: 0px;
+}
+
+.rightarrow {
+  position: absolute;
+  right: 0px;
+}
 
 .thumbnails {
-  background-color: 'red';
   width: 700px;
   height: 100px;
   display: flex;
