@@ -1,0 +1,14 @@
+{
+  "name": "dojo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js | tap-nyan"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tape": "^4.6.3"
+  }
+}
