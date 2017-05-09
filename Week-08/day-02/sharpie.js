@@ -21,3 +21,8 @@ var sharpie1 = new sharpieMaker('black', 5);
 console.log( sharpie1 );
 sharpie1.use();
 console.log( sharpie1 );
+
+var sharpie2 = new sharpieMaker('black', 5);
+console.log( sharpie2 );
+sharpie2.use();
+console.log( sharpie2 );
