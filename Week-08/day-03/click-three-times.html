@@ -25,9 +25,7 @@
 
       let controller = function() {
         clickCounter++;
-        if (clickCounter === 1) {
-          setTimeout(makeItTrue, 5000);
-        } else if (clickCounter >= 3) {
+        if (clickCounter >= 3) {
           printer()
         }
       }
@@ -37,6 +35,8 @@
           textArea.innerText = '5 seconds elapsed and clicked 3 times';
         }
       }
+
+      setTimeout(makeItTrue, 5000);
 
       button.addEventListener('click', controller);
 
