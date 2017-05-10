@@ -1,0 +1,45 @@
+<!-- // Click Three Times
+//
+// Create a simple HTML document with one button. If the user clicks the button 3 times, and 5 seconds is already ellapsed since the page is loaded, a text should apper under the button: 5 seconds ellapsed and clicked 3 times -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Click Three Times</title>
+  </head>
+  <body>
+    <button> click here three times </button>
+    <div></div>
+    <script>
+      'use strict';
+      let button = document.querySelector('button');
+      let textArea = document.querySelector('div');
+      let clickCounter = 0;
+      let condition = false;
+
+      let makeItTrue = function() {
+        condition = true;
+        printer();
+      }
+
+      let controller = function() {
+        clickCounter++;
+        if (clickCounter === 1) {
+          setTimeout(makeItTrue, 5000);
+        } else if (clickCounter >= 3) {
+          printer()
+        }
+      }
+
+      let printer = function() {
+        if (clickCounter >= 3 && condition === true) {
+          textArea.innerText = '5 seconds elapsed and clicked 3 times';
+        }
+      }
+
+      button.addEventListener('click', controller);
+
+    </script>
+  </body>
+</html>
