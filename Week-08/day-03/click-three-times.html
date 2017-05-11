@@ -25,13 +25,11 @@
 
       let controller = function() {
         clickCounter++;
-        if (clickCounter >= 3) {
-          printer()
-        }
+        printer()
       }
 
       let printer = function() {
-        if (clickCounter >= 3 && condition === true) {
+        if (clickCounter >= 3 && condition) {
           textArea.innerText = '5 seconds elapsed and clicked 3 times';
         }
       }
