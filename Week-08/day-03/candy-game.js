@@ -9,7 +9,7 @@ let buttonMCR = document.querySelector('.candy-machine');
 let candyCounter = 0;
 let lollypopCounter = 3;
 let speed = 0;
-let candyGen = 100;
+let candyGen = 10;
 
 let createCandies = function() {
   candyCounter += candyGen;

@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
 let main = document.querySelector('main')
 let resp = {}
 let xhr = new XMLHttpRequest();
 
+// xhr.open('GET', 'http://10.27.99.59:8080/posts', true);
 xhr.open('GET', 'https://time-radish.glitch.me/posts', true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send();
-
 
 xhr.onreadystatechange = function() {
   if (xhr.readyState === 4) {
@@ -30,6 +30,11 @@ xhr.onreadystatechange = function() {
 
       let upvote = document.createElement('div');
       upvote.className = 'upvote';
+      upvote.addEventListener('click', function(){
+        upvote.style.backgroundImage = 'url(css/images/upvoted.png)';
+        votes.innerText++;
+        voteUpdater();
+      });
       stat.appendChild(upvote);
 
       let votes = document.createElement('div');
@@ -39,6 +44,11 @@ xhr.onreadystatechange = function() {
 
       let downvote = document.createElement('div');
       downvote.className = 'downvote';
+      downvote.addEventListener('click', function(){
+        downvote.style.backgroundImage = 'url(css/images/downvoted.png)';
+        votes.innerText--;
+        voteUpdater();
+      });
       stat.appendChild(downvote);
 
       let post = document.createElement('div');
@@ -54,7 +64,11 @@ xhr.onreadystatechange = function() {
       let infos = document.createElement('div');
       infos.className = 'infos';
       let date = resp.posts[i].timestamp;
-      infos.innerText = 'Submitted at ' + timeConverter(date) + ' by ' + resp.posts[i].owner;
+      let owner = resp.posts[i].owner
+      if (owner === null || typeof owner === 'undefined') {
+        owner = 'anonymous';
+      }
+      infos.innerText = 'Submitted at ' + timeConverter(date) + ' by ' + owner;
       post.appendChild(infos);
 
       let actions = document.createElement('div');
@@ -72,6 +86,9 @@ xhr.onreadystatechange = function() {
   }
 }
 
+let voteUpdater = function() {
+  // PUT metódus majd ide jönne...
+}
 
 let timeConverter = function(timestamp) {
   var a = new Date(timestamp * 1000);
