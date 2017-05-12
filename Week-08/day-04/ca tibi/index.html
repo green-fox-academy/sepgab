@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wordnik image search</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<!--
+		STEP 1
+		http://api.wordnik.com:80/v4/word.json/snowman/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key={YOUR_API_KEY}
+		STEP 2
+		https://www.googleapis.com/customsearch/v1?q=hello&cx=013243796230512099154%3Ac2yjchgq67c&searchType=image&key={YOUR_API_KEY}
+	 -->
+
+	 <nav>
+		 <input type="text" id="keyword">
+		 <button id="action">SEARCH</button>
+		 <input type="checkbox" id="yuge"> YUGE IMAGES
+	 </nav>
+
+	 <main>
+		 <article id="wordnik-results"></article>
+		 <article id="image-wrapper">
+		 	<h1>Results</h1>
+		 </article>
+	 </main>
+
+	 <script type="text/javascript" src="keys.js"></script>
+	 <script type="text/javascript" src="js/ajax.js"></script>
+	 <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
