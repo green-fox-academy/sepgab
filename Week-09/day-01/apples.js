@@ -1,4 +1,6 @@
-getApple = function() {
+'use strict';
+
+let getApple = function() {
   return 'Apple';
 }
 
