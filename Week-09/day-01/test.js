@@ -15,3 +15,9 @@ try {
 	console.log('catching error:');
 	console.log(err.message);
 }
+
+module.exports = {
+  addNumbers: addNumbers,
+  median: median,
+  stb: stb
+}
