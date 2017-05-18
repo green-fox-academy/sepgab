@@ -18,6 +18,11 @@ let createPost = function() {
     "href": postUrl.value
   }
   xhr.send(JSON.stringify(message));
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      window.location.href = "index.html";
+    }
+  }
 }
 
 button.addEventListener('click', createPost);
