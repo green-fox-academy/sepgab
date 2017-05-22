@@ -1,25 +1,16 @@
-var TennisGame2 = function(player1Name, player2Name) {
+var TennisGame2 = function() {
     this.P1point = 0;
     this.P2point = 0;
-
     this.P1res = "";
     this.P2res = "";
-
-    this.player1Name = player1Name;
-    this.player2Name = player2Name;
 };
 
 TennisGame2.prototype.getScore = function() {
     var score = "";
+    var scoreArray = ["Love", "Fifteen", "Thirty", "Forty"]
 
     if (this.P1point === this.P2point && this.P1point < 3) {
-        if (this.P1point === 0)
-            score = "Love";
-        if (this.P1point === 1)
-            score = "Fifteen";
-        if (this.P1point === 2)
-            score = "Thirty";
-        score += "-All";
+      score = scoreArray[this.P1point] + '-All';
     }
     if (this.P1point === this.P2point && this.P1point > 2)
         score = "Deuce";
@@ -116,6 +107,4 @@ TennisGame2.prototype.wonPoint = function(player) {
         this.P2Score();
 };
 
-if (typeof window === "undefined") {
-    module.exports = TennisGame2;
-}
+module.exports = TennisGame2;

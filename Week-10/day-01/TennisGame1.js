@@ -14,7 +14,7 @@ TennisGame1.prototype.wonPoint = function(playerName) {
 
 TennisGame1.prototype.getScore = function() {
   if (this.playerScore1 !== this.playerScore2) {
-    this.standing = this.setScore(this.playerScore1) + "-" + this.setScore(this.playerScore2);
+    this.standing = this.getStanding(this.playerScore1) + "-" + this.getStanding(this.playerScore2);
     if (this.playerScore1 >= 4 || this.playerScore2 >= 4) {
       this.scoreAnalyzer(this.playerScore1, this.playerScore2);
     }
@@ -22,13 +22,13 @@ TennisGame1.prototype.getScore = function() {
     if (this.playerScore1 > 2) {
       this.standing = "Deuce";
     } else {
-      this.standing = this.setScore(this.playerScore1) + "-All";
+      this.standing = this.getStanding(this.playerScore1) + "-All";
     }
   }
   return this.standing;
 };
 
-TennisGame1.prototype.setScore = function(currentScore) {
+TennisGame1.prototype.getStanding = function(currentScore) {
   let scoreArray = ["Love", "Fifteen", "Thirty", "Forty"]
   this.standing = scoreArray[currentScore];
   return this.standing;
