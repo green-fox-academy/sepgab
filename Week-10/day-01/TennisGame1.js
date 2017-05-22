@@ -1,56 +1,40 @@
-var score = "";
-
-var TennisGame1 = function(player1Name, player2Name) {
-  this.m_score1 = 0;
-  this.m_score2 = 0;
-  this.player1Name = player1Name;
-  this.player2Name = player2Name;
+var TennisGame1 = function() {
+  this.playerScore1 = 0;
+  this.playerScore2 = 0;
+  this.standing = '';
 };
 
 TennisGame1.prototype.wonPoint = function(playerName) {
   if (playerName === "player1") {
-    this.m_score1++;
+    this.playerScore1++;
   } else {
-    this.m_score2++;
+    this.playerScore2++;
   }
 };
 
 TennisGame1.prototype.getScore = function() {
-  if (this.m_score1 !== this.m_score2) {
-    score = setScore(this.m_score1) + "-" + setScore(this.m_score2);
-    if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-      winAnalyzer(this.m_score1, this.m_score2);
+  if (this.playerScore1 !== this.playerScore2) {
+    this.standing = this.setScore(this.playerScore1) + "-" + this.setScore(this.playerScore2);
+    if (this.playerScore1 >= 4 || this.playerScore2 >= 4) {
+      this.scoreAnalyzer(this.playerScore1, this.playerScore2);
     }
   } else {
-    if (this.m_score1 > 2) {
-      score = "Deuce";
+    if (this.playerScore1 > 2) {
+      this.standing = "Deuce";
     } else {
-      score = setScore(this.m_score1) + "-All";
+      this.standing = this.setScore(this.playerScore1) + "-All";
     }
   }
-
-  return score;
+  return this.standing;
 };
 
-var setScore = function(tempScore) {
-  score = "";
-  switch (tempScore) {
-    case 0:
-    score += "Love";
-    break;
-    case 1:
-    score += "Fifteen";
-    break;
-    case 2:
-    score += "Thirty";
-    break;
-    case 3:
-    score += "Forty";
-    break;
-  }
-  return score;
+TennisGame1.prototype.setScore = function(currentScore) {
+  let scoreArray = ["Love", "Fifteen", "Thirty", "Forty"]
+  this.standing = scoreArray[currentScore];
+  return this.standing;
 }
-var winAnalyzer = function (score1, score2) {
+
+TennisGame1.prototype.scoreAnalyzer = function (score1, score2) {
   let player = '';
   if (score1 > score2){
     player = '1'
@@ -58,11 +42,11 @@ var winAnalyzer = function (score1, score2) {
     player = '2';
   }
   if (Math.abs(score1 - score2) === 1) {
-    score = "Advantage player" + player;
+    this.standing = "Advantage player" + player;
   } else {
-    score = "Win for player" + player;
+    this.standing = "Win for player" + player;
   }
-  return score;
+  return this.standing;
 }
 
 module.exports = TennisGame1;
