@@ -83,8 +83,10 @@ article {
   font-size: 12px;
 }
 
-.actions a {
+.actions div {
+  display:inline-block;
   color: #B6B6B6;
   font-size: 12px;
   font-weight: bold;
+  margin: 0 5px;
 }

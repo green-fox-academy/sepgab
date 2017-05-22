@@ -1,13 +1,14 @@
 'use strict';
 
-let main = document.querySelector('main')
-let resp = {}
-let xhr = new XMLHttpRequest();
+var main = document.querySelector('main')
+var resp = {}
+var xhr = new XMLHttpRequest();
 
 // xhr.open('GET', 'http://10.27.99.59:8080/posts', true);
 
-let getPosts = function() {
-  xhr.open('GET', 'https://time-radish.glitch.me/posts', true);
+var getPosts = function() {
+  xhr.open('GET', 'http://localhost:3000/posts', true);
+  // xhr.open('GET', 'https://time-radish.glitch.me/posts', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send();
   xhr.onreadystatechange = function() {
@@ -17,26 +18,26 @@ let getPosts = function() {
   }
 }
 
-let displayPosts = function() {
+var displayPosts = function() {
   main.innerHTML = '';
   resp = JSON.parse(xhr.response);
   console.log(resp);
-  let postLength = resp.posts.length
+  var postLength = resp.posts.length
   console.log(postLength);
-  for (let i = 0; i < postLength; i++) {
-    let ArtToAdd = document.createElement('article');
+  for (var i = 0; i < postLength; i++) {
+    var ArtToAdd = document.createElement('article');
     main.appendChild(ArtToAdd);
 
-    let ordinal = document.createElement('div');
+    var ordinal = document.createElement('div');
     ordinal.className = 'ordinal'
     ordinal.innerText = i+1;
     ArtToAdd.appendChild(ordinal);
 
-    let stat = document.createElement('div');
+    var stat = document.createElement('div');
     stat.className = 'stat';
     ArtToAdd.appendChild(stat);
 
-    let upvote = document.createElement('div');
+    var upvote = document.createElement('div');
     upvote.className = 'upvote';
     upvote.addEventListener('click', function(){
       upvote.style.backgroundImage = 'url(css/images/upvoted.png)';
@@ -45,12 +46,12 @@ let displayPosts = function() {
     });
     stat.appendChild(upvote);
 
-    let votes = document.createElement('div');
+    var votes = document.createElement('div');
     votes.className = 'votes';
     votes.innerText = resp.posts[i].score;
     stat.appendChild(votes);
 
-    let downvote = document.createElement('div');
+    var downvote = document.createElement('div');
     downvote.className = 'downvote';
     downvote.addEventListener('click', function(){
       downvote.style.backgroundImage = 'url(css/images/downvoted.png)';
@@ -59,43 +60,48 @@ let displayPosts = function() {
     });
     stat.appendChild(downvote);
 
-    let post = document.createElement('div');
+    var post = document.createElement('div');
     post.className = 'post';
     ArtToAdd.appendChild(post);
 
-    let headline = document.createElement('a')
+    var headline = document.createElement('a')
     headline.className = 'headline';
     headline.setAttribute('href', 'http://' + resp.posts[i].href);
     headline.innerText = resp.posts[i].title;
     post.appendChild(headline);
 
-    let infos = document.createElement('div');
+    var infos = document.createElement('div');
     infos.className = 'infos';
-    let date = resp.posts[i].timestamp;
-    let owner = resp.posts[i].owner
+    var date = resp.posts[i].timestamp.slice(0, -8);
+    var owner = resp.posts[i].owner
     if (owner === null || typeof owner === 'undefined') {
       owner = 'anonymous';
     }
-    infos.innerText = 'Submitted at ' + timeConverter(date) + ' by ' + owner;
+    infos.innerText = 'Submitted at ' + date + ' by ' + owner;
     post.appendChild(infos);
 
-    let actions = document.createElement('div');
+    var actions = document.createElement('div');
     actions.className = 'actions';
     post.appendChild(actions);
 
-    let modify = document.createElement('a');
+    var modify = document.createElement('div');
     modify.innerText = 'modify ';
+    modify.addEventListener('click', function(){
+      window.location.href = "modifypost.html#" + i;
+    });
     actions.appendChild(modify);
 
-    let remove = document.createElement('a');
-    remove.innerText = 'remove';
+    var remove = document.createElement('div');
+    remove.innerText = ' remove';
+    remove.addEventListener('click', function(){
+      removePost(i)
+    });
     actions.appendChild(remove);
   }
 }
 
-
-let voteUp = function(num) {
-  xhr.open('PUT', 'https://time-radish.glitch.me/posts/' + num + '/upvote', true);
+var voteUp = function(num) {
+  xhr.open('PUT', 'https://time-radish.glitch.me/posts/' + resp.posts[num].id + '/upvote', true);
   xhr.setRequestHeader('Accept', 'application/json');
   xhr.send();
   xhr.onreadystatechange = function() {
@@ -105,8 +111,8 @@ let voteUp = function(num) {
   }
 }
 
-let voteDown = function(num) {
-  xhr.open('PUT', 'https://time-radish.glitch.me/posts/' + num + '/downvote', true);
+var voteDown = function(num) {
+  xhr.open('PUT', 'https://time-radish.glitch.me/posts/' + resp.posts[num].id + '/downvote', true);
   xhr.setRequestHeader('Accept', 'application/json');
   xhr.send();
   xhr.onreadystatechange = function() {
@@ -116,7 +122,20 @@ let voteDown = function(num) {
   }
 }
 
-let timeConverter = function(timestamp) {
+var removePost = function(num) {
+  xhr.open('DELETE', 'https://time-radish.glitch.me/posts/' + resp.posts[num].id, true);
+  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.send();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      getPosts();
+    }
+  }
+}
+
+
+
+var timeConverter = function(timestamp) {
   var a = new Date(timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
