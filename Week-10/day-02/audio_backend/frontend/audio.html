@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title> Green Fox Player </title>
+    <link rel="stylesheet" href="assets/audio.css">
+    <link <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <main>
+      <section class="container">
+        <div class="playlists">
+          <div class="playlistHeader">
+            <div class="logoAndTitle">
+              <img class="logo"  src="assets/img/foxplayer.png"> </img>
+              <div class="titleArea">
+                <div class="title"> Playlists
+                </div>
+                <div class="addPlaylist">+
+                </div>
+              </div>
+            </div>
+            <img class="visual"  src="assets/img/music-placeholder.png"> </img>
+          </div>
+          <div class="listOfPlaylists">
+            <p class="dark active">All tracks</p>
+            <!-- <p>Favourite tracks</p> -->
+          </div>
+        </div>
+        <div class="tracks">
+          <div class="tracksHeader">
+            <div>
+              <p class="trackTitle"></p>
+              <p class="artist"></p>
+            </div>
+            <div class="addButtons">
+              <div class="addTrack">+
+              </div>
+              <div class="addToFav">
+                <img src="/assets/img/star.svg"> </img>
+              </div>
+            </div>
+          </div>
+          <div class="listOfTracks">
+            <!-- <p class="dark">Track 01</p>
+            <p>Track 02</p>
+            <p class="dark">Track 03</p>
+            <p>Track 04</p>
+            <p class="dark">Track 05</p>
+            <p>Track 06</p>
+            <p class="dark">Track 07</p>
+            <p>Track 08</p>
+            <p class="dark">Track 09</p>
+            <p>Track 10</p> -->
+          </div>
+        </div>
+      </section>
+      <section class="trackController">
+        <img class="rewind" src="/assets/img/rewind.svg"> </img>
+        <img class="pause" src="/assets/img/pause.svg"> </img>
+        <img class="forward" src="/assets/img/forward.svg"> </img>
+        <audio controls="controls" controlsList="nodownload" src="/experiments/testmusic.mp3"
+        autoplay> </audio>
+        <img class="shuffle" src="/assets/img/shuffle.svg"> </img>
+      </section>
+      <section class="dialogs">
+        <div class="addPlaylistDialog invisible">
+          <h3>Enter title for new playlist:</h3>
+          <input type="text" class="text" name="" placeholder="new playlist" required><br>
+          <div class=button>
+            <input type="button" class="cancel" value="Cancel">
+            <input type="button" class="submitPlaylist" value="Save">
+          </div>
+        </div>
+        <div class="addTrackDialog invisible">
+          <h3>Choose playlist:</h3>
+          <select name="" class="select" placeholder="Choose playlist" required>
+          </select><br>
+          <div class=button>
+            <input type="button" class="cancel" value="Cancel">
+            <input type="button" class="submitTrack" value="Save">
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="text/javascript" src="assets/script.js"></script>
+  </body>
+</html>

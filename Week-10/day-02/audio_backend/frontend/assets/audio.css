@@ -1,0 +1,271 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+main {
+  width: 800px;
+  height: 480px;
+  background-color: #F5F5F5;
+  border-radius: 4px;
+  box-shadow: 3px 3px 10px grey;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+}
+
+/*playlist styling*/
+
+.container {
+  width: 800px;
+  height: 420px;
+  display: flex;
+}
+
+.playlistHeader {
+  width: 370px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.visual {
+  width: 160px;
+  height: 160px;
+}
+
+.logo {
+  margin: 20px;
+}
+
+.titleArea {
+  display: flex;
+  width: 210px;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.addPlaylist {
+  font-size: 60px;
+  position: relative;
+  top: 3px;
+  right: 10px;
+  line-height: 20px;
+}
+
+.addPlaylist:hover {
+  cursor: pointer;
+}
+
+.removePlaylist:hover {
+  cursor: pointer;
+}
+
+.listOfPlaylists {
+  height: 260px;
+  overflow-y: scroll;
+}
+
+.listOfPlaylists p {
+  width: 350px;
+  height: 40px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.listOfPlaylists p span {
+  position: absolute;
+  left: 340px;
+  font-weight: bold;
+}
+
+
+/*tracklist styling*/
+
+.tracks {
+  border-left: 2px solid #c1c1c1;
+}
+
+.tracksHeader {
+  width: 390px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.trackTitle {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.artist {
+  color: #c1c1c1;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.addButtons {
+  width: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.addTrack {
+  color: #a1a1a1;
+  font-size: 50px;
+  position: relative;
+  right: 10px;
+  line-height: 20px;
+}
+
+.addTrack:hover {
+  cursor: pointer;
+}
+
+.addToFav:hover {
+  cursor: pointer;
+}
+
+.listOfTracks {
+  width: 420px;
+  height: 340px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.listOfTracks p {
+  width: 385px;
+  height: 40px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  position: relative;
+}
+
+.listOfTracks p span {
+  position: absolute;
+  right: 5px;
+}
+
+.dark {
+  background-color: #EAEAEA;
+}
+
+.active {
+  background-color: #ABE7E5;
+}
+
+/*track controller styling*/
+
+.trackController {
+  width: 800px;
+  height: 60px;
+  background-color: #FFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.trackController img {
+  height: 15px;
+  margin: 0 20px;
+}
+
+.trackController img:hover {
+  cursor: pointer;
+}
+
+.trackController audio {
+  width: 500px;
+}
+
+audio::-webkit-media-controls, audio::-webkit-media-controls-panel {
+	background: transparent;
+}
+
+audio::-webkit-media-controls-play-button {
+  display: none;
+}
+
+/*Dialogs styling*/
+
+.invisible {
+  display: none;
+}
+
+.addPlaylistDialog, .addTrackDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  width: 300px;
+  height: 150px;
+  background-color: #F5F5F5;
+  border-radius: 4px;
+  box-shadow: 3px 3px 10px grey;
+}
+
+h3 {
+  margin: 20px;
+  text-align: center;
+}
+
+.text, .select {
+  text-align: center;
+  width: 200px;
+  margin-left: 50px;
+}
+
+.button {
+  width: 300px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button input {
+  justify-content: center;
+  font-family: 'Raleway', sans-serif;
+  width: 80px;
+  height: 30px;
+  box-shadow: 0 0 5px grey;
+  color: rgb(50, 50, 50);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(225,225,225,1) 100%);
+}
+
+.button :hover {
+  cursor: pointer;
+}
