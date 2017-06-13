@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #50E3C2;
+  height: 100%;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+}
+
+main {
+  width: 400px;
+  height: 500px;
+  background-color: #F5F5F5;
+  border-radius: 4px;
+  box-shadow: 3px 3px 10px grey;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin:30px;
+  text-align: center;
+  color: #a1a1a1;
+  font-size: 48px;
+  font-weight: normal;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.text {
+  width: 200px;
+  height: 25px;
+}
+
+.submitTodo {
+  width: 50px;
+  height: 29px;
+  background-color: purple;
+  color: white;
+  border: none;
+}
+
+.todos {
+  width: 250px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+p {
+  color: #a1a1a1;
+  width: 250px;
+  font-size: 16px;
+  margin-top: 24px;
+}
+
+p p {
+  margin-left: 16px;
+}
+
+.todos p img {
+  position: absolute;
+  right: 105px;
+  height: 20px;
+}
+
+.todos p input {
+  position: absolute;
+  right: 80px;
+  cursor: pointer;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  background: #eee;
+  border:1px solid #ddd;
+}
+
+.done {
+  color: #d1d1d1;
+}
