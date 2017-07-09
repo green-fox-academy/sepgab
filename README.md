@@ -1,5 +1,7 @@
 # sepgab
 ## [sepgab's github page](https://github.com/sepgab/ "Sepgab's github page") <br>
+## [Team HYDRA's github page](https://github.com/greenfox-academy/zodiac-hydra) <br>
+## [Fedex day project's frontend](https://fedex-fidget-spinner.herokuapp.com/) <br>
 ## :+1: [CV](https://sepgab.github.io/ "Sepgab's homepage") :+1: <br>
 ## [Zodiac Syllabus](https://github.com/greenfox-academy/zodiac-syllabus "Zodiac Syllabus") <br>
 Exam links:
